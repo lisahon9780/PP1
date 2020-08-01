@@ -1,0 +1,65 @@
+#include "ClassFileHeader.h"
+
+int main(){
+  // variables for CIT1325
+string first, last, g1, g2, g3, g4,gF; // variables for getline when reading in file.
+vector <string> nameFirst1; // adds variables from first to vector.
+vector <string> nameLast1; // adds variables from last to vector.
+vector <double> gradeOne1; // adds variables from g1 to vector.
+vector <double> gradeTwo1; // adds variables from g2 to vector.
+vector <double> gradeThree1; // adds variables from g3 to vector.
+vector <double> gradeFour1; // adds variables from g4 to vector.
+vector <double> gradeFinal1; // adds variables from g4 to vector.
+vector <double> overallAvg1;
+
+ifstream inFile1("CIT1325.txt");
+  if (inFile1.is_open()){
+    while(!inFile1.eof()){
+      getline(inFile1,first, ',');
+      nameFirst1.push_back(first);
+      getline(inFile1,last, ',');
+      nameLast1.push_back(last);
+      getline(inFile1,g1, ',');
+      gradeOne1.push_back(stod(g1));
+      getline(inFile1,g2, ',');
+      gradeTwo1.push_back(stod(g2));
+      getline(inFile1,g3, ',');
+      gradeThree1.push_back(stod(g3));
+      getline(inFile1,g4,',');
+      gradeFour1.push_back(stod(g4));
+      getline(inFile1,gF, '\n');
+      gradeFinal1.push_back(stod(gF));
+      }
+    inFile1.close();
+    }
+
+for (int i = 0; i <  nameFirst1.size(); i++){
+  double tempSum;  
+  double tempAvg;
+
+  tempSum = gradeOne1.at(i) + gradeTwo1.at(i) + gradeThree1.at(i) + gradeFour1.at(i) + (gradeFinal1.at(i) *  2);
+  tempAvg = tempSum / 6;
+  overallAvg1.push_back(tempAvg);
+
+  cout << tempSum << endl;
+  cout << tempAvg << endl;
+
+  if (tempAvg >= 90.0)
+        cout << 'A' << endl;
+  else if (tempAvg >= 80.0) 
+        cout << 'B' << endl;
+  else if (tempAvg >= 70.0)
+        cout << 'C' << endl;
+  else if (tempAvg >= 60.0)
+        cout << 'D' << endl;
+  else
+        cout << 'F'<< endl;
+
+
+    cout<< accumulate(overallAvg1.begin(), overallAvg1.end(), 0) / 25 << endl; 
+}
+for(int i=0; i < 25; i++){
+  cout << nameFirst1.at(i) << " " << nameLast1.at(i) << " " << gradeOne1.at(i) << " " << gradeTwo1.at(i) << " "<< gradeThree1.at(i) << " " << gradeFour1.at(i) << " " << gradeFinal1.at(i) << endl;
+}
+return 0;
+}
